@@ -1,2 +1,12 @@
-<h1>Stories#new</h1>
-<p>Find me in app/views/stories/new.html.erb</p>
+<h1>New Story</h1>
+<p>Submit your link to HNClone</p>
+<%= form_for @story, :url => {:action => "create" }, :html => {:class => "span4"} do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	
+	<%= f.label :url %>
+	<%= f.text_field :url %>
+	
+	<%= f.submit "Create" %>
+<% end %>
+	

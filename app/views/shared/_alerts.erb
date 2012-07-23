@@ -1,0 +1,17 @@
+<% if flash[:message] %>
+	<div class="alert alert-info">
+	  <% flash[:message].each do |attribute, message| %>
+			<%= message.first %>
+		<% end %>
+	</div>
+<% elsif flash[:alert] %>
+	<div class="alert alert-error">
+	  <% flash[:alert].each do |attribute, message| %>
+			<%= message.first %>
+		<% end %>
+	</div>
+<% elsif flash[:success] %>
+	<div class="alert alert-success">
+	  <%= flash[:success] %>
+	</div>
+<% end %>

@@ -7,6 +7,8 @@ gem 'rails', '3.2.6'
 
 gem 'therubyracer'
 gem 'less-rails-bootstrap'
+gem 'kaminari'
+gem 'bcrypt-ruby', '3.0.1'
 
 group :production do
   gem 'pg'

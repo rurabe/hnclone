@@ -1,4 +1,7 @@
 Hnclone::Application.routes.draw do
+  root :to => 'stories#index'
+  resources :stories
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

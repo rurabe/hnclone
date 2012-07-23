@@ -5,6 +5,9 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'therubyracer'
+gem 'less-rails-bootstrap'
+
 group :production do
   gem 'pg'
   

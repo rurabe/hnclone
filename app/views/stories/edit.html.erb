@@ -1,0 +1,12 @@
+<h1>Edit Story</h1>
+<%= form_for @story, :url => {:action => "update" }, :html => {:class => "span4"} do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	
+	<%= f.label :url %>
+	<%= f.text_field :url %>
+	
+	<%= f.hidden_field :user_id, { :value => current_user.id } %>
+	<br>
+	<%= f.submit "Save", :class=>"btn btn-primary" %>
+<% end %>

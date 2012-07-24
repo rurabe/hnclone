@@ -1,0 +1,6 @@
+<h1> <%= "#{current_user.first_name} #{current_user.last_name}'s submitted stories" %></h1>
+<ul>
+<% @stories.each do |story| %>
+	<li><%= link_to story.title, story.url %> | <%= story.url %> | <%= link_to "Edit", edit_story_path(story.id)%></li>
+<% end %>
+</ul>

@@ -6,9 +6,14 @@ class UsersController < ApplicationController
   def index
   end
   
+  def show
+    @stories = current_user.stories
+  end
+  
   def create
     @user = User.new(params[:user])
     if @user.save
+      sign_in @user
       flash[:success] = "Welcome #{@user.first_name}!"
       redirect_to root_path
     else

@@ -5,6 +5,9 @@ Hnclone::Application.routes.draw do
 
   root :to => 'stories#index'
   resources :stories
+  resources :users
+  
+  match 'signup' => 'users#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

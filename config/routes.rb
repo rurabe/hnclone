@@ -7,7 +7,7 @@ Hnclone::Application.routes.draw do
   resources :stories
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :comments, only: [:create]
+  resources :comments, only: [:create, :show]
   
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'

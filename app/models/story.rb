@@ -4,5 +4,6 @@ class Story < ActiveRecord::Base
                                   :message => "That story has already been submitted"} 
                                   
   belongs_to :user
+  has_many :comments, :as => :commentable
   has_many :comments
 end

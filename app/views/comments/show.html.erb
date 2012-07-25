@@ -1,0 +1,13 @@
+<h3><%= @comment.body %></h3>
+
+<%= form_for @new_comment, :url => {:controller => "comments", :action => "create" }, :html => {:class => "span4"} do |f|%>
+	<%= f.label "Reply" %>
+	<%= f.text_area :body %>
+
+	<%= f.hidden_field :user_id, { :value => current_user.id } %>
+	<%= f.hidden_field :commentable_id, { :value => @comment.id } %>
+	<%= f.hidden_field :commentable_type, { :value => @comment.class.to_s } %>
+	<%= f.hidden_field :story_id, { :value => @story.id } %>
+	<br>
+	<%= f.submit "Create", :class=>"btn btn-primary" %>	
+<% end %>

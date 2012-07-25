@@ -6,6 +6,8 @@
 	<%= f.text_area :body %>
 
 	<%= f.hidden_field :user_id, { :value => current_user.id } %>
+	<%= f.hidden_field :commentable_id, { :value => @story.id } %>
+	<%= f.hidden_field :commentable_type, { :value => @story.class.to_s } %>
 	<%= f.hidden_field :story_id, { :value => @story.id } %>
 	<br>
 	<%= f.submit "Create", :class=>"btn btn-primary" %>	
@@ -13,7 +15,7 @@
 
 <ul>
 <% @comments.each do |comment| %>
-<li><%= comment.user.email %> | <%= comment.body %></li>
+<li><%= comment.user.email %> | <%= comment.body %> | <%= link_to "Reply", comment_path(comment)%></li>
 <% end %>
 </ul>
 

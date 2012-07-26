@@ -3,6 +3,7 @@ class StoriesController < ApplicationController
   before_filter :signed_in_user , only: [:create, :new, :update, :edit]
   before_filter :authorized_user, only: [:edit, :update]
   before_filter :still_editable, only: [:edit]
+  before_filter :init_vote, only: [:index, :show]
   
   def create
     @story = Story.new(params[:story])
@@ -49,5 +50,9 @@ class StoriesController < ApplicationController
     
     def still_editable
       redirect_to story_path(@story) unless Time.now < @story.created_at + 15.minutes
+    end
+    
+    def init_vote
+      @vote = Vote.new
     end
 end

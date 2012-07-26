@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :signed_in_user, only: [:create,:show]
+  before_filter :init_vote, only: [:show]
   
   def create
     @comment = Comment.new(params[:comment])
@@ -17,5 +18,11 @@ class CommentsController < ApplicationController
     @story = Story.find_by_id(@comment.story_id)
     @new_comment = Comment.new
   end
+  
+  private
+  
+    def init_vote
+      @vote = Vote.new
+    end
   
 end

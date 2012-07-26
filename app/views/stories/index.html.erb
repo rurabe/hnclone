@@ -2,7 +2,15 @@
 <p>Here's a list of all stories:</p>
 	<ul>
 <% @stories.each do |story| %>
-	<li><%= link_to story.title, story_path(story) %> | <%= link_to story.url, story.url %></li>
+	<li>
+		<%= link_to votes_path(:vote => { voteable_id: story.id, voteable_type: "Story", user_id: current_user.id, direction: "up" } ), :action => "create", :method => :post do %>
+			<i class="icon-thumbs-up"></i> 
+		<% end %>
+	
+	<%= link_to story.title, story_path(story) %> | 
+	<%= link_to story.url, story.url %> | 
+	[<%= story.votes.length %>]</li>
+	
 	<% end %>
 	</ul>
 	<br>

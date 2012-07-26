@@ -1,4 +1,6 @@
 Hnclone::Application.routes.draw do
+  get "votes/create"
+
   get "users/new"
 
   get "users/index"
@@ -8,6 +10,7 @@ Hnclone::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :comments, only: [:create, :show]
+  resources :votes, only: [:create]
   
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'

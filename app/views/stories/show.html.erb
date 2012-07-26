@@ -15,7 +15,22 @@
 	<% end %>
 <% end %>
 
-<ul>
+<% def print_comment(comment) %>
+	<% children = comment.comments %>  
+	<li><%= comment.body %></li>
+	<% if !children.empty? %>  
+		<ul>
+		<% children.each {|child| print_comment(child)} %>
+		</ul>
+	<% end %>
+<% end %>
+
+<% @story.comments.where(:commentable_type => "Story").each do |top_comment|  %>
+	<ul><% print_comment(top_comment)%></ul>
+<% end %>
+
+
+<!--THE ORIGINAL COMMENT STUFF <ul>
 <% @comments.each do |comment| %>
 <li><%= comment.user.email %> | <%= comment.body %>
 <%if signed_in? %>
@@ -25,7 +40,4 @@
 <% end %>
 </li>
 <% end %>
-</ul>
-
-
-
+</ul> -->

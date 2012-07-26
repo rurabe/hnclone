@@ -17,6 +17,8 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'quiet_assets'
+  gem 'thin'
 end
 
 # Gems used only for assets and not required

@@ -2,7 +2,7 @@
 <p>Here's a list of all stories:</p>
 	<ul>
 <% @stories.each do |story| %>
-	<li><%= link_to story.title, story.url %> | <%= story.url %></li>
+	<li><%= link_to story.title, story_path(story) %> | <%= link_to story.url, story.url %></li>
 	<% end %>
 	</ul>
 	<br>

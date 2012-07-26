@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :signed_in_user, only: [:create,:show]
+  
   def create
     @comment = Comment.new(params[:comment])
     if @comment.save

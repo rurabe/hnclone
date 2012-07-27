@@ -4,5 +4,6 @@ class Comment < ActiveRecord::Base
   belongs_to :story
   has_many :comments, :as => :commentable
   has_many :votes, :as => :voteable
+  has_many :karmas, :as => :karmable
   attr_accessible :body, :user_id, :commentable_type, :commentable_id, :story_id
 end

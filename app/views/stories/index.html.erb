@@ -14,4 +14,11 @@
   <br>
   <%= paginate @stories %>
 
+  <script>
+
+    //Callback function to hide the thumb
+    $(".icon-thumbs-up").click(function(event){ $(this).parent().hide("slow");});
+
+  </script>
+
 

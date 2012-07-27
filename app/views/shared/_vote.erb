@@ -1,5 +1,7 @@
 <% if show_vote(commentable) %>
-  <%= link_to votes_path(:vote => { voteable_id: commentable.id, voteable_type: commentable.class.to_s, user_id: current_user.id, value: value } ), :action => "create", :method => :post do %>
-    <i class="icon-thumbs-<%= value > 0? "up": "down" %>"></i>
+  <% if value == 1 || (value == -1 && can_downvote?) %>
+   <%= link_to votes_path(:vote => { voteable_id: commentable.id, voteable_type: commentable.class.to_s, user_id: current_user.id, value: value }, :karma => { user_id: current_user.id, karmable_id: commentable.id, karmable_type: commentable.class.to_s } ), :action => "create", :method => :post do %>
+      <span><i class="icon-thumbs-<%= value > 0? "up": "down" %>"></i></span>
+    <% end %>
   <% end %>
 <% end %>

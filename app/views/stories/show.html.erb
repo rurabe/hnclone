@@ -1,37 +1,41 @@
-<h1><%= @story.title %></h1>
+<h1 style="display:inline"><%= @story.title %></h1> [<%= @story.votes.length %>]<%= render 'shared/vote', :commentable => @story, :value => 1  %>
 <h2><%= @story.url %></h2>
 
 <% def print_comment(comment) %>
-	<% children = comment.comments %>  
-	<li><%= comment.user.email %> | <%= comment.body %>
-	<%if signed_in? %>
-		<%= link_to "Reply", comment_path(comment)%>
-	<% else%>
-		| <%= link_to "Sign in to comment", signin_path %>
-	<% end %></li>
-	<% if !children.empty? %>  
-		<ul>
-		<% children.each {|child| print_comment(child)} %>
-		</ul>
-	<% end %>
+  <% children = comment.comments %>
+  <li>
+      <%= render 'shared/vote', :commentable => comment, :value => 1  %> <%= render 'shared/vote', :commentable => comment, :value => -1  %>
+      <%= comment.user.email %> | <%= comment.body %>
+      <%if signed_in? %>
+        <%= link_to "Reply", comment_path(comment)%>
+      <% else%>
+        | <%= link_to "Sign in to comment", signin_path %>
+      <% end %>
+      [<%= score(comment) %>]
+  </li>
+  <% if !children.empty? %>
+    <ul>
+      <% children.each {|child| print_comment(child)} %>
+    </ul>
+  <% end %>
 <% end %>
 
 <% @story.comments.where(:commentable_type => "Story").each do |top_comment|  %>
-	<ul><% print_comment(top_comment)%></ul>
+  <ul><% print_comment(top_comment)%></ul>
 <% end %>
 
 <% if signed_in? %>
-	<%= form_for @comment, :url => {:controller => "comments", :action => "create" }, :html => {:class => "span4"} do |f|%>
-		<%= f.label "Comment" %>
-		<%= f.text_area :body %>
+  <%= form_for @comment, :url => {:controller => "comments", :action => "create" }, :html => {:class => "span4"} do |f|%>
+    <%= f.label "Comment" %>
+    <%= f.text_area :body %>
 
-		<%= f.hidden_field :user_id, { :value => current_user.id } %>
-		<%= f.hidden_field :commentable_id, { :value => @story.id } %>
-		<%= f.hidden_field :commentable_type, { :value => @story.class.to_s } %>
-		<%= f.hidden_field :story_id, { :value => @story.id } %>
-		<br>
-		<%= f.submit "Create", :class=>"btn btn-primary" %>	
-	<% end %>
+    <%= f.hidden_field :user_id, { :value => current_user.id } %>
+    <%= f.hidden_field :commentable_id, { :value => @story.id } %>
+    <%= f.hidden_field :commentable_type, { :value => @story.class.to_s } %>
+    <%= f.hidden_field :story_id, { :value => @story.id } %>
+    <br>
+    <%= f.submit "Create", :class=>"btn btn-primary" %>
+  <% end %>
 <% end %>
 
 
@@ -39,9 +43,9 @@
 <% @comments.each do |comment| %>
 <li><%= comment.user.email %> | <%= comment.body %>
 <%if signed_in? %>
-	<%= link_to "Reply", comment_path(comment)%>
+  <%= link_to "Reply", comment_path(comment)%>
 <% else%>
-	| <%= link_to "Sign in to comment", signin_path %>
+  | <%= link_to "Sign in to comment", signin_path %>
 <% end %>
 </li>
 <% end %>

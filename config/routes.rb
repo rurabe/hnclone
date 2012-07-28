@@ -6,16 +6,22 @@ Hnclone::Application.routes.draw do
   get "users/index"
 
   root :to => 'stories#index'
-  resources :stories
+  resources :stories do
+    resources :votes, :only => [:create]
+  end
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :comments, only: [:create, :show]
+  resources :comments, only: [:create, :show] do
+    resources :votes, :only => [:create]
+  end
+
   resources :votes, only: [:create]
-  
+
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'
   match '/signout' => 'sessions#destroy', via: :delete
-  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

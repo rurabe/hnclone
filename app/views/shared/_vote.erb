@@ -1,7 +1,8 @@
 <% if show_vote(commentable) %>
   <% if value == 1 || (value == -1 && can_downvote?) %>
-   <%= link_to votes_path(:vote => { voteable_id: commentable.id, voteable_type: commentable.class.to_s, user_id: current_user.id, value: value }, :karma => { user_id: current_user.id, karmable_id: commentable.id, karmable_type: commentable.class.to_s } ), :action => "create", :method => :post do %>
-      <span><i class="icon-thumbs-<%= value > 0? "up": "down" %>"></i></span>
-    <% end %>
+  <!-- = image_link 'path/to/image', polymorphic_path(@votable, commentable), :class => 'downvote' -->
+   <%#= link_to votes_path(:vote => { voteable_id: commentable.id, voteable_type: commentable.class.to_s, user_id: current_user.id, value: value }, :karma => { user_id: current_user.id, karmable_id: commentable.id, karmable_type: commentable.class.to_s } ), :action => "create", :method => :post do %>
+      <span><i class="icon-thumbs-<%= value > 0? "up": "down" %> <%= commentable.class.to_s %> <%=commentable.id%>"></i></span>
+    <%# end %>
   <% end %>
 <% end %>
